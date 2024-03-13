@@ -1,18 +1,41 @@
-import "./App.css";
+import { createContext, useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import ProductList from "./components/ProductFeed/components/ProductList";
+import DetailedProduct from "./components/ProductFeed/components/DetailedProduct";
+
+const ProductContext = createContext();
 
 function App() {
+  const [products, setProducts] = useState([]);
+
+  const fetchProducts = () => {
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setProducts(data);
+      });
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <>
-      <h1 style={{textAlign:'center'}}>Hello world!</h1>
-      <div className="container text-center">
-        <div className="row align-items-start">
-          <div className="col">First column</div>
-          <div className="col">Second column</div>
-          <div className="col">Third column</div>
-        </div>
-      </div>
+      <ProductContext.Provider
+        value={{ products: products, setProducts: setProducts }}
+      >
+        <Routes>
+          <Route path="/" element={<ProductList></ProductList>}></Route>
+          <Route
+            path="/product/:id"
+            element={<DetailedProduct></DetailedProduct>}
+          ></Route>
+        </Routes>
+      </ProductContext.Provider>
     </>
   );
 }
 
-export default App;
+export { App, ProductContext };
