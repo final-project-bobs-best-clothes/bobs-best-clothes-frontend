@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import ProductList from "./components/ProductFeed/components/ProductList";
 import DetailedProduct from "./components/ProductFeed/components/DetailedProduct";
 import Header from "./components/Header/Header";
+import ProductFeed from "./components/ProductFeed/ProductFeed";
 
 const ProductContext = createContext();
 
@@ -29,7 +29,7 @@ function App() {
       >
         <Header></Header>
         <Routes>
-          <Route path="/" element={<ProductList></ProductList>}></Route>
+          <Route path="/" element={<ProductFeed></ProductFeed>}></Route>
           <Route
             path="/product/:id"
             element={<DetailedProduct></DetailedProduct>}
