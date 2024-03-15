@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import ProductList from "./components/ProductFeed/components/ProductList";
 import DetailedProduct from "./components/ProductFeed/components/DetailedProduct";
+import Header from "./components/Header/Header";
 
 const ProductContext = createContext();
 
@@ -26,6 +27,7 @@ function App() {
       <ProductContext.Provider
         value={{ products: products, setProducts: setProducts }}
       >
+        <Header></Header>
         <Routes>
           <Route path="/" element={<ProductList></ProductList>}></Route>
           <Route
