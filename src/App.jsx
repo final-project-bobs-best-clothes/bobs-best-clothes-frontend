@@ -10,11 +10,11 @@ function App() {
   const [products, setProducts] = useState([]);
 
   const fetchProducts = () => {
-    fetch("https://fakestoreapi.com/products")
+    fetch("http://localhost:4000/products")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setProducts(data);
+        console.log(data.data);
+        setProducts(data.data);
       });
   };
 
