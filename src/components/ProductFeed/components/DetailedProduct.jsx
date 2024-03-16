@@ -23,7 +23,6 @@ function DetailedProduct() {
   // find the index of the product in the cart, if the product already exists in the cart, increase the quantity of the existing product, else add the product to the cart with quantity 1
   const handleAddToCart = () => {
     const existingIndex = cart.findIndex((item) => item.id === product.id);
-
     if (existingIndex !== -1) {
       const newCart = [...cart];
       newCart[existingIndex].quantity += 1;
@@ -34,14 +33,19 @@ function DetailedProduct() {
     }
   };
 
-  console.log("Added", cart);
   return (
-    <div>
-      <ProductItem product={product} />
-      <ul>
-        <li>{product.description}</li>
-      </ul>
-      <button onClick={handleAddToCart}>Add to cart</button>
+    <div className="d-flex justify-content-center align-items-center vh-100 mx-5">
+      <div className="text-center">
+        <img
+          src={product.image}
+          className="img-fluid mb-3" // Use Bootstrap's img-fluid class for responsive images
+          alt={product.title}
+          style={{ maxWidth: "300px", maxHeight: "300px" }} // Set max width and height for the image
+        />
+        <h5 className="card-title">{product.title}</h5>
+        <p className="card-text">{product.description}</p>
+        <button onClick={handleAddToCart} className="btn btn-primary">Add to Cart</button>
+      </div>
     </div>
   );
 }

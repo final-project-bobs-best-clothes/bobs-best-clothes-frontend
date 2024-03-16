@@ -1,0 +1,15 @@
+.sidebar {
+    background-color: rgb(218, 218, 218);
+}
+
+  
+/*   CATEGORY LIST */
+
+  .category-list {
+    list-style: none; /* Remove bullets */
+    cursor: pointer; /* Change cursor to pointer */
+  }
+  
+  .category-list li:hover {
+    font-weight: bold; /* Make text bold on hover */
+  }

@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CartContext } from "../../App";
 import ProductItem from "../ProductFeed/components/ProductItem";
 
 function CartItems() {
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, setCart, setTotalPrice, totalPrice } = useContext(CartContext);
+
+  //Update total efery time the cart changes 
+  useEffect(() => {
+    calculateTotal();
+  }, [cart]);
 
   const handleIncrement = (index) => {
     const updatedCart = [...cart];
@@ -22,17 +27,18 @@ function CartItems() {
     setCart(updatedCart);
   };
 
-  const calculateSubtotal = (item) => {
-    return item.price * item.quantity;
-  };
-
   const calculateTotal = () => {
     let total = 0;
     cart.forEach((item) => {
       total += calculateSubtotal(item);
     });
-    return total.toFixed(2);
+    setTotalPrice(total.toFixed(2));
   };
+
+  const calculateSubtotal = (item) => {
+    return item.price * item.quantity;
+  };
+
 
   return (
     <div className="cart-items" style={{ marginTop: "100px" }}>
@@ -44,7 +50,6 @@ function CartItems() {
               <ProductItem product={item}></ProductItem>
               <p>{item.description}</p>
               <div>
-                <p>Quantity</p>
                 <button onClick={() => handleDecrement(index)}>-</button>
                 <p>Quantity: {item.quantity}</p>
                 <button onClick={() => handleIncrement(index)}>+</button>
@@ -54,7 +59,7 @@ function CartItems() {
           </li>
         ))}
       </ul>
-      <p>Total: ${calculateTotal()}</p>
+      <p>Total: ${totalPrice}</p>
       <button>Check Out</button>
     </div>
   );

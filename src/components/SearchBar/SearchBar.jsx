@@ -5,7 +5,7 @@ function SearchBar({filterText, setFilterText}) {
         setFilterText(e.target.value);
     }
   return (
-    <div style={{ marginTop:'100px'}}>
+    <div>
     <form>
         <input type="text" placeholder='Search....' value={filterText} onChange={handleChange}></input>
     </form>

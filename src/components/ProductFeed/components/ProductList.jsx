@@ -3,6 +3,7 @@ import { ProductContext } from "../../../App";
 import ProductItem from "./ProductItem";
 import { Link } from "react-router-dom";
 
+
 function ProductList({ filterText, filterCategory }) {
   const { products } = useContext(ProductContext);
 
@@ -18,14 +19,15 @@ function ProductList({ filterText, filterCategory }) {
   });
 
   return (
-    <div>
+    <div className="row">
       {filteredProducts.length === 0 ? (
         <p>No products found</p>
       ) : (
         filteredProducts.map((item) => (
-          <div key={item.id}>
-            <Link to={`/product/${item.id}`}>{item.title}</Link>
-            <ProductItem product={item} />
+          <div key={item.id} className="col-md-4 mb-4 p-4">
+            <Link to={`/product/${item.id}`} style={{ textDecoration: 'none' }}>
+              <ProductItem product={item} />
+            </Link>
           </div>
         ))
       )}
