@@ -1,11 +1,13 @@
-import React from "react";
-import CategoryList from "../../Categories/CategoryList";
 
-function SideBar({ onCategorySelect }) {
+import CategoryList from "../Categories/CategoryList";
+
+
+function SideBar({setFilterCategory}) {
 
   return (
-    <div>
-        <CategoryList onCategorySelect={onCategorySelect}></CategoryList>
+    <div className="mt-3 ">
+        <h3>Filter on</h3>
+        <CategoryList setFilterCategory={setFilterCategory}></CategoryList>
     </div>
   );
 }

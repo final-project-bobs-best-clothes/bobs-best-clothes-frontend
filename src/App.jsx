@@ -7,10 +7,13 @@ import CartItems from "./components/CartList/CartItems";
 
 const ProductContext = createContext();
 const CartContext = createContext();
+const CategoryContext = createContext(); 
 
 function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [filterCategory, setFilterCategory] = useState('');
 
   const fetchProducts = () => {
     fetch("https://fakestoreapi.com/products")
@@ -28,12 +31,10 @@ function App() {
   //console.log(cart);
   return (
     <>
-      <ProductContext.Provider
-        value={{ products: products, setProducts: setProducts }}
-      >
-        <CartContext.Provider value={{cart: cart, setCart:setCart}}>
-
+      <CartContext.Provider value={{cart: cart, setCart:setCart, totalPrice: totalPrice, setTotalPrice: setTotalPrice}}>
         <Header></Header>
+      <CategoryContext.Provider value={{ filterCategory: filterCategory, setFilterCategory: setFilterCategory}}>
+      <ProductContext.Provider value={{ products: products, setProducts: setProducts }} >
         <Routes>
           <Route path="/" element={<ProductFeed></ProductFeed>}></Route>
           <Route
@@ -42,11 +43,11 @@ function App() {
           ></Route>
           <Route path="/cart" element={<CartItems></CartItems>}></Route>
         </Routes>
-        </CartContext.Provider>
-
       </ProductContext.Provider>
+      </CategoryContext.Provider>
+      </CartContext.Provider>
     </>
   );
 }
 
-export { App, ProductContext, CartContext };
+export { App, ProductContext, CartContext, CategoryContext };

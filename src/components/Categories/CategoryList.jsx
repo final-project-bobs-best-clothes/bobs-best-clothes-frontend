@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import "./../../App.css"
 
-function CategoryList({ onCategorySelect }) {
+function CategoryList({ setFilterCategory }) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -18,10 +19,10 @@ function CategoryList({ onCategorySelect }) {
 
   return (
     <div>
-      <h2>Categories</h2>
-      <ul>
+      <h5>Categories</h5>
+      <ul className="category-list">
         {categories.map((category, index) => (
-          <li key={index} onClick={() => onCategorySelect(category)}>
+          <li key={index} onClick={() => setFilterCategory(category)}>
             {category}
           </li>
         ))}

@@ -1,15 +1,22 @@
 import React from "react";
+import "./../../../App.css"
 
 function ProductItem({ product }) {
   return (
-    <div>
-      <p>${product.price}</p>
-      <img
-        src={product.image}
-        alt={product.title}
-        style={{ width: "20%" }}
-      ></img>
-    </div>
+    <div className="card h-100 d-flex flex-column">
+      <div className="card-header">
+        <img
+          src={product.image}
+          className="card-img-top flex-grow-1"
+          alt={product.title}
+          style={{ objectFit: "cover" }}
+        />
+      </div>
+      <div className="card-body">
+        <h5 className="card-title">{product.title}</h5>
+        <p className="card-text">${product.price}</p>
+      </div>
+  </div>
   );
 }
 
