@@ -3,17 +3,20 @@ import { ProductContext } from "../../../App";
 import ProductItem from "./ProductItem";
 import { Link } from "react-router-dom";
 
-function ProductList({ filterText, filterCategory}) {
+function ProductList({ filterText, filterCategory }) {
   const { products } = useContext(ProductContext);
 
-    // Filter products based on search text or category
-    const filteredProducts = products.filter((item) => {
-      const isMatchedTitle = item.title.toLowerCase().includes(filterText.toLowerCase());
-      const isMatchedCategory = filterCategory === '' || item.category.toLowerCase() === filterCategory.toLowerCase();
-      return isMatchedTitle && isMatchedCategory;
-    });
+  // Filter products based on search text or category
+  const filteredProducts = products.filter((item) => {
+    const isMatchedTitle = item.title
+      .toLowerCase()
+      .includes(filterText.toLowerCase());
+    const isMatchedCategory =
+      filterCategory === "" ||
+      item.category.toLowerCase() === filterCategory.toLowerCase();
+    return isMatchedTitle && isMatchedCategory;
+  });
 
- 
   return (
     <div>
       {filteredProducts.length === 0 ? (
