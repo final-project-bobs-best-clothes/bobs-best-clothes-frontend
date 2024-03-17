@@ -42,7 +42,7 @@ function CartItems() {
 
   return (
     <section className="cart">
-      <div className="container" style={{ marginTop: "100px" }}>
+      <div className="container w-75" style={{ marginTop: "100px" }}>
         <h2 style={{ textAlign: "center", fontWeight: "bold" }}>
           Your shopping cart
         </h2>
@@ -60,22 +60,22 @@ function CartItems() {
             </Link>
           </div>
         ) : (
-          <ul>
+          <ul className="list-unstyled">
             {cart.map((item, index) => (
               <li key={index}>
                 <div
                   className="row"
                   style={{
-                    border: "2px solid lightgrey",
-                    borderRadius: "20px",
+                    border: "1px solid lightgrey",
+                    borderRadius: "10px",
                     marginTop: "24px",
                     padding: "16px 0",
                   }}
                 >
-                  <div className="col">
-                    <img src={item.image} style={{ width: "50%" }}></img>
+                  <div className="col-4">
+                    <img src={item.image} style={{ width: "40%" }}></img>
                   </div>
-                  <div className="col" style={{ background: "lightblue" }}>
+                  <div className="col-8">
                     <p>{item.title}</p>
                     <div className="row">
                       <div className="input-group col">
@@ -87,7 +87,7 @@ function CartItems() {
                         <input
                           type="text"
                           className="text-center"
-                          style={{ border: "none", width: "50px" }}
+                          style={{ border: "none", width: "25px" }}
                           value={item.quantity}
                           readOnly
                         />
@@ -97,7 +97,7 @@ function CartItems() {
                           </button>
                         </span>
                       </div>
-                      <div className="col d-flex align-items-center justify-content-end">
+                      <div className="col d-flex align-items-center justify-content-start">
                         <input
                           type="text"
                           style={{
@@ -115,8 +115,12 @@ function CartItems() {
                 </div>
               </li>
             ))}
-            <h3>Total: ${totalPrice}</h3>
-            <button className="btn btn-dark">Check Out</button>
+            <div className="d-flex justify-content-end mt-4">
+              <h4 style={{ fontWeight: "bold" }}>Total: ${totalPrice}</h4>
+            </div>
+            <div className="d-flex justify-content-center mt-4">
+              <button className="btn btn-dark">Check Out</button>
+            </div>
           </ul>
         )}
       </div>
