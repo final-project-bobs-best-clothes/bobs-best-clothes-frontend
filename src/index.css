@@ -9,15 +9,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --button-background: #131313;
-  --product-item-background: #efefef;
-  --text-color: #0f1110;
+
 
 }
 
-
-
-body {
-  margin: 0;
-
-}
