@@ -6,7 +6,7 @@ function ProductItem({ product }) {
     <div className="card h-100 d-flex flex-column">
       <div className="card-header">
         <img
-          src={product.image}
+          src={product.imageURL}
           className="card-img-top flex-grow-1"
           alt={product.title}
           style={{ objectFit: "cover" }}

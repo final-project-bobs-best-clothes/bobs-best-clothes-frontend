@@ -39,7 +39,7 @@ function DetailedProduct() {
       <div className="row" style={{ marginTop:'150px'}}>
         <div className="col-4">
         <img
-          src={product.image}
+          src={product.imageURL}
           className="img-fluid mb-3" // Use Bootstrap's img-fluid class for responsive images
           alt={product.title}
           style={{maxWidth:'300px', maxHeight:'300px'}} // Set max width and height for the image

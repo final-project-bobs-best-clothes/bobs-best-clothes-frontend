@@ -73,7 +73,7 @@ function CartItems() {
                   }}
                 >
                   <div className="col-4">
-                    <img src={item.image} style={{ width: "40%" }}></img>
+                    <img src={item.imageURL} style={{ width: "40%" }}></img>
                   </div>
                   <div className="col-8">
                     <p>{item.title}</p>

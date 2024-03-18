@@ -9,11 +9,11 @@ function CategoryList({ setFilterCategory }) {
   }, []);
 
   const fetchCategories = () => {
-    fetch("https://fakestoreapi.com/products/categories")
+    fetch("http://localhost:4000/categories")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setCategories(data);
+        console.log(data.data);
+        setCategories(data.data);
       });
   };
 
@@ -22,8 +22,8 @@ function CategoryList({ setFilterCategory }) {
       <h5>Categories</h5>
       <ul className="category-list">
         {categories.map((category, index) => (
-          <li key={index} onClick={() => setFilterCategory(category)}>
-            {category}
+          <li key={index} onClick={() => setFilterCategory(category.name)}>
+            {category.name}
           </li>
         ))}
       </ul>

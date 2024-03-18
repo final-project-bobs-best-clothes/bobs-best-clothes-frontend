@@ -6,15 +6,27 @@ import { Link } from "react-router-dom";
 
 function ProductList({ filterText, filterCategory }) {
   const { products } = useContext(ProductContext);
-
+  
   // Filter products based on search text or category
-  const filteredProducts = products.filter((item) => {
+/*   const filteredProducts = products.filter((item) => {
+    console.log(item)
     const isMatchedTitle = item.title
       .toLowerCase()
       .includes(filterText.toLowerCase());
     const isMatchedCategory =
       filterCategory === "" ||
       item.category.toLowerCase() === filterCategory.toLowerCase();
+    return isMatchedTitle && isMatchedCategory;
+  }); */
+
+  const filteredProducts = products.filter((item) => {
+    console.log(item)
+    const isMatchedTitle = item.title
+      .toLowerCase()
+      .includes(filterText.toLowerCase());
+    const isMatchedCategory =
+      filterCategory === "" ||
+      item.category.name.toLowerCase() === filterCategory.toLowerCase();
     return isMatchedTitle && isMatchedCategory;
   });
 
