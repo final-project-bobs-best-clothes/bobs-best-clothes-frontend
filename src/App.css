@@ -1,15 +1,39 @@
-.sidebar {
-    background-color: rgb(218, 218, 218);
+* {
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.6;
 }
 
-  
+body {
+  margin: 0;
+}
+
+:root {
+  --button-background: #131313;
+  --product-item-background: #efefef;
+  --text-color: #0f1110;
+}
+
+.sidebar {
+  background-color: rgb(218, 218, 218);
+}
+
 /*   CATEGORY LIST */
 
-  .category-list {
-    list-style: none; /* Remove bullets */
-    cursor: pointer; /* Change cursor to pointer */
-  }
-  
-  .category-list li:hover {
-    font-weight: bold; /* Make text bold on hover */
-  }
+.category-list {
+  list-style: none; /* Remove bullets */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.category-list li:hover {
+  font-weight: bold; /* Make text bold on hover */
+}
+
+/* BUTTON*/
+.btn-dark {
+  background: var(--button-background);
+}
+
+ul{
+  list-style: none;
+}

@@ -1,11 +1,12 @@
 import { useContext, useEffect } from "react";
 import { CartContext } from "../../App";
-import ProductItem from "../ProductFeed/components/ProductItem";
+import { Link } from "react-router-dom";
+import { FaPlus, FaMinus } from "react-icons/fa";
 
 function CartItems() {
   const { cart, setCart, setTotalPrice, totalPrice } = useContext(CartContext);
 
-  //Update total efery time the cart changes 
+  //Update total efery time the cart changes
   useEffect(() => {
     calculateTotal();
   }, [cart]);
@@ -39,29 +40,91 @@ function CartItems() {
     return item.price * item.quantity;
   };
 
-
   return (
-    <div className="cart-items" style={{ marginTop: "100px" }}>
-      <h3>Cart Items</h3>
-      <ul>
-        {cart.map((item, index) => (
-          <li key={index}>
-            <div>
-              <ProductItem product={item}></ProductItem>
-              <p>{item.description}</p>
-              <div>
-                <button onClick={() => handleDecrement(index)}>-</button>
-                <p>Quantity: {item.quantity}</p>
-                <button onClick={() => handleIncrement(index)}>+</button>
-                <p>Subtotal: ${calculateSubtotal(item)}</p>
-              </div>
+    <section className="cart">
+      <div className="container w-75" style={{ marginTop: "100px" }}>
+        <h2 style={{ textAlign: "center", fontWeight: "bold" }}>
+          Your shopping cart
+        </h2>
+        {cart.length === 0 ? (
+          <div>
+            <p>Your cart is empty!</p>
+            <p>
+              When you add something to your cart, it will appear here. Ready to
+              get started?
+            </p>
+            <Link to="/">
+              <button type="button" className="btn btn-dark">
+                Start
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <ul className="list-unstyled">
+            {cart.map((item, index) => (
+              <li key={index}>
+                <div
+                  className="row"
+                  style={{
+                    border: "1px solid lightgrey",
+                    borderRadius: "10px",
+                    marginTop: "24px",
+                    padding: "16px 0",
+                  }}
+                >
+                  <div className="col-4">
+                    <img src={item.image} style={{ width: "40%" }}></img>
+                  </div>
+                  <div className="col-8">
+                    <p>{item.title}</p>
+                    <div className="row">
+                      <div className="input-group col">
+                        <span className="input-group-btn">
+                          <button type="button" className="btn btn-default">
+                            <FaMinus onClick={() => handleDecrement(index)} />
+                          </button>
+                        </span>
+                        <input
+                          type="text"
+                          className="text-center"
+                          style={{ border: "none", width: "25px" }}
+                          value={item.quantity}
+                          readOnly
+                        />
+                        <span className="input-group-btn">
+                          <button type="button" className="btn btn-default">
+                            <FaPlus onClick={() => handleIncrement(index)} />
+                          </button>
+                        </span>
+                      </div>
+                      <div className="col d-flex align-items-center justify-content-start">
+                        <input
+                          type="text"
+                          style={{
+                            border: "none",
+                            width: "100px",
+                            fontWeight: "bold",
+                            textAlign: "right",
+                          }}
+                          value={"$" + calculateSubtotal(item)}
+                          readOnly
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))}
+            <div className="d-flex justify-content-end mt-4">
+              <h4 style={{ fontWeight: "bold" }}>Total: ${totalPrice}</h4>
             </div>
-          </li>
-        ))}
-      </ul>
-      <p>Total: ${totalPrice}</p>
-      <button>Check Out</button>
-    </div>
+            <div className="d-flex justify-content-center mt-4">
+              <button className="btn btn-dark">Check Out</button>
+            </div>
+          </ul>
+        )}
+      </div>
+    </section>
   );
 }
 

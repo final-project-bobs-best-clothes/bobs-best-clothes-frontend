@@ -9,8 +9,8 @@ function Header() {
   const totalQuantity = cart.reduce((total, item) => total + item.quantity,0);
 
   return (
-    <nav className=" navbar fixed-top navbar-light bg-light">
-      <div className="container-fluid" style={{ maxWidth: "1300px" }}>
+    <nav className=" navbar fixed-top bg-white border-bottom">
+      <div className="container">
         <Link to="/" className="navbar-brand" style={{ cursor: "pointer" }}>
           Logo
         </Link>
@@ -19,15 +19,17 @@ function Header() {
             className="me-5"
             style={{ fontSize: "25", cursor: "pointer" }}
           />
-          <Link to="/cart">
+          <div style={{position:"relative"}}>
+          <Link to="/cart" style={{color:'inherit'}}>
             <MdShoppingCart style={{ fontSize: "25", cursor: "pointer" }} />
             {totalQuantity > 0 && (
               <span
                 className="badge rounded-pill bg-primary"
                 style={{
                   position: "absolute",
-                  top: "10px",
-                  right: "20px",
+                  top: "0px",
+                  right: "4px",
+                  transform:"translate(50%, -50%)",
                   fontSize: "12px",
                 }}
               >
@@ -35,6 +37,8 @@ function Header() {
               </span>
             )}
           </Link>
+          </div>
+          
         </div>
       </div>
     </nav>
