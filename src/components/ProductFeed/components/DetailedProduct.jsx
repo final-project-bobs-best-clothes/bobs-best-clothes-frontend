@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { CartContext, ProductContext } from "../../../App";
 import { useParams } from "react-router-dom";
 import ProductItem from "./ProductItem";
+import { MdShoppingCart } from "react-icons/md";
 
 function DetailedProduct() {
   const { products } = useContext(ProductContext);
@@ -34,17 +35,24 @@ function DetailedProduct() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 mx-5">
-      <div className="text-center">
+    <div className="d-flex justify-content-center align-items-center mx-5  ">
+      <div className="row" style={{ marginTop:'150px'}}>
+        <div className="col-4">
         <img
           src={product.image}
           className="img-fluid mb-3" // Use Bootstrap's img-fluid class for responsive images
           alt={product.title}
-          style={{ maxWidth: "300px", maxHeight: "300px" }} // Set max width and height for the image
+          style={{maxWidth:'300px', maxHeight:'300px'}} // Set max width and height for the image
         />
-        <h5 className="card-title">{product.title}</h5>
+        </div>
+        <div className="col-8">
+        <h5 className="card-title pt-4">{product.title}</h5>
+        <p className="pt-4" style={{fontWeight:'bold'}} >{"$" + product.price}</p>
         <p className="card-text">{product.description}</p>
-        <button onClick={handleAddToCart} className="btn btn-primary">Add to Cart</button>
+        <button onClick={handleAddToCart} className="btn btn-dark mt-4">Add to Cart <MdShoppingCart/></button>
+
+        </div>
+
       </div>
     </div>
   );
