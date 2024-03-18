@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext, ProductContext } from "../../../App";
 import { useParams } from "react-router-dom";
-import ProductItem from "./ProductItem";
 import { MdShoppingCart } from "react-icons/md";
 
 function DetailedProduct() {

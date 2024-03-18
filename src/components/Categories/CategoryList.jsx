@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+
+import { useEffect, useState } from "react";
 import "./../../App.css"
 
 function CategoryList({ setFilterCategory }) {
@@ -20,9 +22,9 @@ function CategoryList({ setFilterCategory }) {
   return (
     <div>
       <h5>Categories</h5>
-      <ul className="category-list">
-        {categories.map((category, index) => (
-          <li key={index} onClick={() => setFilterCategory(category.name)}>
+      <ul className="simple-list">
+        {categories.map((category) => (
+          <li key={category.id} onClick={() => setFilterCategory(category.name)}>
             {category.name}
           </li>
         ))}
