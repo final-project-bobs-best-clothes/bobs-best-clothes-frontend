@@ -1,10 +1,13 @@
 import { useContext, useEffect } from "react";
-import { CartContext } from "../../App";
+import { CartContext, OrderContext } from "../../App";
 import { Link } from "react-router-dom";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import "./../../App.css"
 
 function CartItems() {
   const { cart, setCart, setTotalPrice, totalPrice } = useContext(CartContext);
+  const { setOrders, orders } = useContext(OrderContext)
+  const localUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
   //Update total efery time the cart changes
   useEffect(() => {
@@ -40,9 +43,20 @@ function CartItems() {
     return item.price * item.quantity;
   };
 
+  const handleCheckOut = () => {
+    setOrders([...orders, 
+      {
+        items: cart,
+        user: localUser,
+        id: orders.length + 1,
+        totalPrice: totalPrice
+      }])
+    setCart([])  
+  }
+
   return (
     <section className="cart">
-      <div className="container w-75" style={{ marginTop: "100px" }}>
+      <div className="container w-75 push-down">
         <h2 style={{ textAlign: "center", fontWeight: "bold" }}>
           Your shopping cart
         </h2>
@@ -119,7 +133,7 @@ function CartItems() {
               <h4 style={{ fontWeight: "bold" }}>Total: ${totalPrice}</h4>
             </div>
             <div className="d-flex justify-content-center mt-4">
-              <button className="btn btn-dark">Check Out</button>
+              <button onClick={handleCheckOut} className="btn btn-dark">Check Out</button>
             </div>
           </ul>
         )}
