@@ -8,7 +8,7 @@ function DetailedProduct() {
   const { cart, setCart } = useContext(CartContext);
   const [product, setProduct] = useState(null);
   const { id } = useParams();
-
+  
   useEffect(() => {
     const selectedProduct = products.find(
       (product) => Number(product.id) === Number(id)
@@ -20,16 +20,18 @@ function DetailedProduct() {
     return <div>Loading...</div>;
   }
 
-  // find the index of the product in the cart, if the product already exists in the cart, increase the quantity of the existing product, else add the product to the cart with quantity 1
+
   const handleAddToCart = () => {
-    const existingIndex = cart.findIndex((item) => item.id === product.id);
-    if (existingIndex !== -1) {
-      const newCart = [...cart];
-      newCart[existingIndex].quantity += 1;
-      console.log("Quantity", newCart[existingIndex].quantity);
-      setCart(newCart);
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
+    //Get existing index
+    const existingIndex = cart.findIndex((cartItem) => cartItem.product.id === product.id);
+
+    if(existingIndex === -1){
+      setCart([...cart, {product: product, quantity: 1}
+      ]);
+    }else {
+      const updatedCart = [...cart];
+      updatedCart[existingIndex].quantity +=1;  
+      setCart(updatedCart);
     }
   };
 
