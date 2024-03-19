@@ -38,7 +38,7 @@ function DetailedProduct() {
   return (
     <div className="d-flex justify-content-center align-items-center mx-5  ">
       <div className="row" style={{ marginTop:'150px'}}>
-        <div className="col-4">
+        <div className="col-12 col-md-4 d-flex justify-content-center ">
         <img
           src={product.imageURL}
           className="img-fluid mb-3" // Use Bootstrap's img-fluid class for responsive images
@@ -46,7 +46,7 @@ function DetailedProduct() {
           style={{maxWidth:'300px', maxHeight:'300px'}} // Set max width and height for the image
         />
         </div>
-        <div className="col-8">
+        <div className="col-12 col-md-8">
         <h5 className="card-title pt-4">{product.title}</h5>
         <p className="pt-4" style={{fontWeight:'bold'}} >{"$" + product.price}</p>
         <p className="card-text">{product.description}</p>

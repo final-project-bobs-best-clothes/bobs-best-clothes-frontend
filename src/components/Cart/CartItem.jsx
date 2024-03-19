@@ -7,11 +7,11 @@ function CartItem({item, handleIncrement, handleDecrement}) {
   return (
     <div className="container">
         <div className="row" style={{border: "1px solid lightgrey", borderRadius: "10px", marginTop:"24px", padding:"16px 0"}}>
-          <div className="col-4">
+          <div className="col-12 col-md-4 d-flex justify-content-center">
                 <img src={item.product.imageURL} style={{width:"40%"}} alt={item.product.title}></img>
             </div>
-            <div className="col-8">
-                <p>{item.product.title}</p>
+            <div className="col-12 col-md-8 ">
+                <p className="mt-2">{item.product.title}</p>
                 <div className="row">
                     <div className="input-group col">
                     <span className="input-group-btn">
