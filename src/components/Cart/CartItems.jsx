@@ -3,6 +3,7 @@ import { CartContext, OrderContext } from "../../App";
 import { Link } from "react-router-dom";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import "./../../App.css"
+import CartItem from "./CartItem";
 
 function CartItems() {
   const { cart, setCart, setTotalPrice, totalPrice } = useContext(CartContext);
@@ -13,6 +14,8 @@ function CartItems() {
   useEffect(() => {
     calculateTotal();
   }, [cart]);
+
+  console.log(cart);
 
   const handleIncrement = (index) => {
     const updatedCart = [...cart];
@@ -77,7 +80,27 @@ function CartItems() {
           <ul className="list-unstyled">
             {cart.map((item, index) => (
               <li key={index}>
-                <div
+                <CartItem item={item} handleDecrement={()=>handleDecrement(index)} handleIncrement={()=> handleIncrement(index)} calculateSubtotal={calculateSubtotal}></CartItem>
+              </li>
+            ))}
+            <div className="d-flex justify-content-end mt-4">
+              <h4 style={{ fontWeight: "bold" }}>Total: ${totalPrice}</h4>
+            </div>
+            <div className="d-flex justify-content-center mt-4">
+              <button onClick={handleCheckOut} className="btn btn-dark">Check Out</button>
+            </div>
+          </ul>
+        )}
+      </div>
+
+    </section>
+  );
+}
+
+export default CartItems;
+
+
+{/*<div
                   className="row"
                   style={{
                     border: "1px solid lightgrey",
@@ -126,20 +149,4 @@ function CartItems() {
                       </div>
                     </div>
                   </div>
-                </div>
-              </li>
-            ))}
-            <div className="d-flex justify-content-end mt-4">
-              <h4 style={{ fontWeight: "bold" }}>Total: ${totalPrice}</h4>
-            </div>
-            <div className="d-flex justify-content-center mt-4">
-              <button onClick={handleCheckOut} className="btn btn-dark">Check Out</button>
-            </div>
-          </ul>
-        )}
-      </div>
-    </section>
-  );
-}
-
-export default CartItems;
+                        </div>*/}
