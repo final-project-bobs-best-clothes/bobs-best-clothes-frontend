@@ -45,16 +45,42 @@ function CartItems() {
     return item.product.price * item.quantity;
   };
 
-  const handleCheckOut = () => {
-    console.log(cart)
-    setOrders([...orders, 
-      {
-        cartItems: cart,
-        user: localUser,
-        id: orders.length + 1,
-        totalPrice: totalPrice
-      }])
-    setCart([])  
+  const handleCheckOut = async () => {
+
+
+    console.log(cart);
+
+    // Create a new order object
+    const newOrder = {
+      cartItems: cart,
+      user: localUser,
+      total: totalPrice
+    };
+
+    try {
+      const res = await fetch("http://localhost:4000/orders", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(newOrder)
+      })
+      if(!res.ok){
+        console.error("Failed to add post")
+      }
+      else{
+        console.log("order succesfully added")
+        setOrders([...orders, 
+          {
+            cartItems: cart,
+            user: localUser,
+            id: orders.length + 1,
+            total: totalPrice
+          }])
+        setCart([])  
+      }
+    }
+    catch (error){
+      console.error('Error:', error)
+    }
   }
 
   return (

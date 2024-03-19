@@ -1,10 +1,23 @@
 import { OrderContext } from "../../../App";
-import { useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import OrderItem from "./OrderItem";
 
 function OrderList() {
-  const {orders} = useContext(OrderContext);
-  console.log(orders)
+  const {orders, setOrders} = useContext(OrderContext);
+  
+  const fetchOrders = () => {
+    fetch("http://localhost:4000/orders")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.data, "fetch");
+        setOrders(data.data);
+      });
+  };
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
 
   return (
     <div className="container">
@@ -14,7 +27,7 @@ function OrderList() {
             <div className="border rounded p-3">
               <h5 className="mb-3">Order Number: {order.id}</h5>
               <OrderItem order={order} />
-              <h1>Total: {order.totalPrice}</h1>
+              <h1>Total: {order.total}</h1>
             </div>
           </div>
         </div>
