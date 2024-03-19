@@ -1,15 +1,17 @@
+/* eslint-disable react/prop-types */
 import { useContext, useEffect } from "react";
 import { CartContext, OrderContext } from "../../App";
 import { Link } from "react-router-dom";
-import { FaPlus, FaMinus } from "react-icons/fa";
 import "./../../App.css"
+import CartItem from "./CartItem";
 
 function CartItems() {
   const { cart, setCart, setTotalPrice, totalPrice } = useContext(CartContext);
-  const { setOrders, orders } = useContext(OrderContext)
+  const { setOrders, orders } = useContext(OrderContext);
   const localUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  //Update total efery time the cart changes
+  console.log(cart)
+  //Update total every time the cart changes
   useEffect(() => {
     calculateTotal();
   }, [cart]);
@@ -21,8 +23,8 @@ function CartItems() {
   };
 
   const handleDecrement = (index) => {
-    const updatedCart = [...cart];
     // check the quantity of the product at the specified index greater than 1, then decrease the quantity, else remove the product from the cart
+    const updatedCart = [...cart];
     if (updatedCart[index].quantity > 1) {
       updatedCart[index].quantity -= 1;
     } else {
@@ -40,13 +42,14 @@ function CartItems() {
   };
 
   const calculateSubtotal = (item) => {
-    return item.price * item.quantity;
+    return item.product.price * item.quantity;
   };
 
   const handleCheckOut = () => {
+    console.log(cart)
     setOrders([...orders, 
       {
-        items: cart,
+        cartItems: cart,
         user: localUser,
         id: orders.length + 1,
         totalPrice: totalPrice
@@ -77,56 +80,11 @@ function CartItems() {
           <ul className="list-unstyled">
             {cart.map((item, index) => (
               <li key={index}>
-                <div
-                  className="row"
-                  style={{
-                    border: "1px solid lightgrey",
-                    borderRadius: "10px",
-                    marginTop: "24px",
-                    padding: "16px 0",
-                  }}
-                >
-                  <div className="col-4">
-                    <img src={item.imageURL} style={{ width: "40%" }}></img>
-                  </div>
-                  <div className="col-8">
-                    <p>{item.title}</p>
-                    <div className="row">
-                      <div className="input-group col">
-                        <span className="input-group-btn">
-                          <button type="button" className="btn btn-default">
-                            <FaMinus onClick={() => handleDecrement(index)} />
-                          </button>
-                        </span>
-                        <input
-                          type="text"
-                          className="text-center"
-                          style={{ border: "none", width: "25px" }}
-                          value={item.quantity}
-                          readOnly
-                        />
-                        <span className="input-group-btn">
-                          <button type="button" className="btn btn-default">
-                            <FaPlus onClick={() => handleIncrement(index)} />
-                          </button>
-                        </span>
-                      </div>
-                      <div className="col d-flex align-items-center justify-content-start">
-                        <input
-                          type="text"
-                          style={{
-                            border: "none",
-                            width: "100px",
-                            fontWeight: "bold",
-                            textAlign: "right",
-                          }}
-                          value={"$" + calculateSubtotal(item)}
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <CartItem item={item} calculateSubtotal={calculateSubtotal}
+                handleDecrement={() => handleDecrement(index)} 
+                handleIncrement={() => handleIncrement(index)}>
+
+                </CartItem>
               </li>
             ))}
             <div className="d-flex justify-content-end mt-4">
@@ -143,3 +101,4 @@ function CartItems() {
 }
 
 export default CartItems;
+
