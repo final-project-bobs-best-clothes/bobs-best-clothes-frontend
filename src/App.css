@@ -63,3 +63,9 @@ ul{
 select.form-select{
   padding: 12px 0;
 }
+
+.admin-panel-link{
+  text-decoration: none;
+  color: var(--text-color);
+  margin-right: 20px;
+}

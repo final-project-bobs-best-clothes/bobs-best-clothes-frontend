@@ -7,6 +7,10 @@ import ProductFeed from "./components/ProductFeed/ProductFeed";
 import CartItems from "./components/Cart/CartItems";
 import Profile from "./components/Profile/Profile";
 
+import ProductForm from "./components/CreateForm/ProductForm";
+import CategoryForm from "./components/CreateForm/CategoryForm";
+import AdminPanel from "./components/Admin/AdminPanel";
+
 
 const ProductContext = createContext();
 const CartContext = createContext();
@@ -15,6 +19,7 @@ const OrderContext = createContext();
 
 
 function App() {
+  const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -27,6 +32,15 @@ function App() {
       .then((data) => {
         console.log(data.data);
         setProducts(data.data);
+      });
+  };
+
+  const fetchCategories = () => {
+    fetch("http://localhost:4000/categories")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.data);
+        setCategories(data.data);
       });
   };
 
@@ -43,6 +57,7 @@ function App() {
 
   useEffect(() => {
     fetchProducts();
+    fetchCategories();
     fetchUser();
   }, []);
 
@@ -52,7 +67,9 @@ function App() {
       <OrderContext.Provider value={{orders: orders, setOrders: setOrders}}>
       <CartContext.Provider value={{cart: cart, setCart:setCart, totalPrice: totalPrice, setTotalPrice: setTotalPrice}}>
         <Header></Header>
-      <CategoryContext.Provider value={{ filterCategory: filterCategory, setFilterCategory: setFilterCategory}}>
+        <AdminPanel></AdminPanel>
+       
+      <CategoryContext.Provider value={{ categories: categories ,filterCategory: filterCategory, setFilterCategory: setFilterCategory}}>
       <ProductContext.Provider value={{ products: products, setProducts: setProducts }} >
         <Routes>
           <Route path="/" element={<ProductFeed ></ProductFeed>}></Route>
@@ -62,6 +79,9 @@ function App() {
           ></Route>
           <Route path="/cart" element={<CartItems></CartItems>}></Route>
           <Route path="/profile" element={<Profile></Profile>}></Route>
+          <Route path="/createProduct" element={<ProductForm></ProductForm>}></Route>
+          <Route path="/createCategory" element={<CategoryForm></CategoryForm>}></Route>
+
         </Routes>
       </ProductContext.Provider>
       </CategoryContext.Provider>
