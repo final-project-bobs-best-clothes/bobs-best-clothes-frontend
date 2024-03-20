@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { MdShoppingCart } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
+import { FaUserLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../App";
 
@@ -15,6 +16,13 @@ function Header() {
          <h3 style={{fontWeight:"bold"}}> Bob's Best Clothes</h3>
         </Link>
         <div className="d-flex">
+          {/* TEMPORARY AUTH LINK */}
+          <Link to="/authentication" style={{color:'inherit'}}>
+          <FaUserLock
+            className="me-5"
+            style={{ fontSize: "25", cursor: "pointer" }}
+          />
+          </Link>
           <Link to="/profile" style={{color:'inherit'}}>
           <FaUserCircle
             className="me-5"

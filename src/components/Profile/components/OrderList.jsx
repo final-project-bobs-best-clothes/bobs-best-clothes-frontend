@@ -1,6 +1,7 @@
 import { OrderContext } from "../../../App";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext} from "react";
 import OrderItem from "./OrderItem";
+
 
 function OrderList() {
   const {orders, setOrders} = useContext(OrderContext);
