@@ -15,7 +15,7 @@ function SearchBar({ filterText, setFilterText }) {
           style={{
             borderRadius: "10px",
             padding: "8px 12px",
-            width: "70%",
+            width: "80%",
             border: "1px solid lightgrey",
           }}
         ></input>

@@ -1,7 +1,5 @@
-/* eslint-disable react/prop-types */
-
 import { useEffect, useState } from "react";
-import "./../../App.css"
+import { Dropdown } from "react-bootstrap";
 
 function CategoryList({ setFilterCategory }) {
   const [categories, setCategories] = useState([]);
@@ -21,16 +19,47 @@ function CategoryList({ setFilterCategory }) {
 
   return (
     <div>
-      <h5>Categories</h5>
-      <ul className="simple-list">
+      <select
+        className="form-select"
+        onChange={(e) => setFilterCategory(e.target.value)}
+        style={{
+          width: "180px",
+          border: "none",
+          fontWeight: "bold",
+          cursor: "pointer",
+          padding: "6px 12px",
+        }}
+      >
+        <option value=""> All products</option>
         {categories.map((category) => (
-          <li key={category.id} onClick={() => setFilterCategory(category.name)}>
+          <option
+            key={category.id}
+            value={category.name}
+          >
             {category.name}
-          </li>
+          </option>
         ))}
-      </ul>
+      </select>
     </div>
   );
 }
 
 export default CategoryList;
+{
+  /**      <Dropdown  onSelect={(e) => setFilterCategory(e.target.value)} >
+        <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+          Filter Categories
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item key={0} onSelect={() => setFilterCategory('')}>
+            All products
+          </Dropdown.Item>
+          {categories.map((category) => (
+            <Dropdown.Item key={category.id} onSelect={() => {
+               setFilterCategory(category.name) }}>
+              {category.name}
+            </Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown> */
+}
