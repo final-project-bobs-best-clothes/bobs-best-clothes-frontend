@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./../../../App.css"
 
 function LoginForm() {
+    const [failedLogin, setFailedLogin] = useState(false) 
     const [loginCredentials, setLoginCredentials] = useState(
        {
         username: "",
@@ -30,13 +31,27 @@ function LoginForm() {
         });
         if (!res.ok) {
           console.error("Failed to login");
+          setFailedLogin(true)
+          setLoginCredentials({
+            username: "",
+            password: ""
+          })
         } else {
+
           console.log("Login successful");
+          setFailedLogin(false)
+          
           const data = await res.json();
           console.log(data);
+
           const jwtToken = data.token
           localStorage.setItem('token', jwtToken);
           fetchUser(data.id)
+
+          setLoginCredentials({
+            username: "",
+            password: ""
+          })
         }
       } catch (error) {
         console.error('Error:', error);
@@ -55,7 +70,7 @@ function LoginForm() {
         .then((data) => {
           console.log(data.data);
           localStorage.setItem("loggedInUser", JSON.stringify(data.data));
-          
+          window.location.reload();
         })
         .catch((error) => {
           console.error('Error fetching user data:', error);
@@ -65,7 +80,7 @@ function LoginForm() {
 
   return (
     <div className="container mt-5">
-    <div className="row justify-content-center push-down">
+    <div className="row justify-content-center ">
       <div className="col-md-6">
         <div className="card">
           <div className="card-header">Login</div>
@@ -79,6 +94,7 @@ function LoginForm() {
                 <label htmlFor="password" className="form-label">Password</label>
                 <input type="password" className="form-control" name="password" placeholder="Password" value={loginCredentials.password} onChange={handleChange} required />
               </div>
+              {(failedLogin) && <p style={{color: "red"}}>Wrong password or username</p>}
               <button type="submit" className="btn btn-dark">Login</button>
             </form>
           </div>

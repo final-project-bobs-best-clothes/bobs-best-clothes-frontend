@@ -1,5 +1,6 @@
 import OrderList from "./components/OrderList";
 import ProfileInfo from "./components/ProfileInfo";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import "./../../App.css";
@@ -7,8 +8,16 @@ import ProfileNavbar from "./components/ProfileNavbar";
 
 function Profile() {
   const [showState, setShowState] = useState("info"); 
+  const loggedInUser = localStorage.getItem("loggedInUser")
 
-  
+  if(!loggedInUser){
+    return (
+      <div className="push-down text-center">
+        <p>You have been logged out</p>
+        <Link to={`/authentication`} style={{textDecoration:"none", color:"var(--text-color)"}} > <strong>Log back in to veiw you profile</strong></Link>
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -27,7 +36,4 @@ function Profile() {
   );
 }
 
-export default Profile; // Export Profile as default
-
-// Alternatively, you can use named export:
-// export { Profile };
+export default Profile; 
