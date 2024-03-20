@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Dropdown } from "react-bootstrap";
+import { CategoryContext } from "../../App";
 
 function CategoryList({ setFilterCategory }) {
-  const [categories, setCategories] = useState([]);
+ const {categories} = useContext(CategoryContext)
+/*   const [categories, setCategories] = useState([]); */
 
-  useEffect(() => {
+/*   useEffect(() => {
     fetchCategories();
   }, []);
 
@@ -15,7 +17,7 @@ function CategoryList({ setFilterCategory }) {
         console.log(data.data, "categories");
         setCategories(data.data);
       });
-  };
+  }; */
 
   return (
     <div>

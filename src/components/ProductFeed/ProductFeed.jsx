@@ -4,6 +4,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { CategoryContext } from "../../App";
 import SideBar from "../SideBar/SideBar";
 import "./../../App.css";
+import CategoryList from "../Categories/CategoryList";
 
 function ProductFeed() {
   const { setFilterCategory, filterCategory } = useContext(CategoryContext);
@@ -16,7 +17,9 @@ function ProductFeed() {
           <SearchBar filterText={filterText} setFilterText={setFilterText} />
         </div>
         <div className="col-md-2 col-12">
-          <SideBar setFilterCategory={setFilterCategory}></SideBar>
+          <CategoryList setFilterCategory={setFilterCategory}> </CategoryList>
+
+          {/* <SideBar setFilterCategory={setFilterCategory}></SideBar> */}
         </div>
 
       </div>
