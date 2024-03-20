@@ -1,13 +1,15 @@
 import { OrderContext } from "../../../App";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState} from "react";
 import OrderItem from "./OrderItem";
 
 function OrderList() {
   const { orders, setOrders } = useContext(OrderContext);
   const reverseOrders = [...orders].reverse();
   const [currentPage, setCurrentPage] = useState(1);
-  const ordersPerPage = 3;
 
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  const ordersPerPage = 3;
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
   const currentOrders = reverseOrders.slice(indexOfFirstOrder, indexOfLastOrder);
@@ -17,7 +19,12 @@ function OrderList() {
   };
 
   const fetchOrders = () => {
-    fetch("http://localhost:4000/orders")
+    const token = localStorage.getItem('token')
+    console.log(token)
+    console.log(loggedInUser.id)
+    fetch(`http://localhost:4000/orders`, {
+      method: "GET",
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data.data, "fetch");

@@ -56,11 +56,13 @@ function CartItems() {
       user: localUser,
       total: totalPrice
     };
+    const token = localStorage.getItem('token')
+    console.log(token)
 
     try {
       const res = await fetch("http://localhost:4000/orders", {
         method: "POST",
-        headers: { 'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
         body: JSON.stringify(newOrder)
       })
       if(!res.ok){

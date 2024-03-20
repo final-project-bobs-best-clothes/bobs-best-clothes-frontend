@@ -12,7 +12,7 @@ function CategoryList({ setFilterCategory }) {
     fetch("http://localhost:4000/categories")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data);
+        console.log(data.data, "categories");
         setCategories(data.data);
       });
   };

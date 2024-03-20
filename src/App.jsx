@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 import ProductFeed from "./components/ProductFeed/ProductFeed";
 import CartItems from "./components/Cart/CartItems";
 import Profile from "./components/Profile/Profile";
+import Authentication from "./components/Security/Authentication";
 
 
 const ProductContext = createContext();
@@ -30,7 +31,7 @@ function App() {
       });
   };
 
-  //Temporary set logged in user to first in list
+/*   //Temporary set logged in user to first in list
   const fetchUser = () => {
     fetch("http://localhost:4000/users")
       .then((res) => res.json())
@@ -39,11 +40,11 @@ function App() {
         const tempUser = data.data[0]
         localStorage.setItem("loggedInUser", JSON.stringify(tempUser));
       });
-  };
+  }; */
 
   useEffect(() => {
     fetchProducts();
-    fetchUser();
+ /*    fetchUser(); */
   }, []);
 
   //console.log(cart);
@@ -62,6 +63,7 @@ function App() {
           ></Route>
           <Route path="/cart" element={<CartItems></CartItems>}></Route>
           <Route path="/profile" element={<Profile></Profile>}></Route>
+          <Route path="/authentication" element={<Authentication></Authentication>}></Route>
         </Routes>
       </ProductContext.Provider>
       </CategoryContext.Provider>
