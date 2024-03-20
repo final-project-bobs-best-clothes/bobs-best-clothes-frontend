@@ -48,3 +48,18 @@ body {
 ul{
   list-style: none;
 }
+
+/*PAGINATION ORDERS LIST*/
+
+.page-item.active .page-link {
+  background-color: var(--button-background);
+  color: white;
+}
+.page-link{
+  background: white;
+  color: var(--text-color);
+}
+
+select.form-select{
+  padding: 12px 0;
+}
