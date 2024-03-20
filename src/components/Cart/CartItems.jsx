@@ -85,7 +85,7 @@ function CartItems() {
 
   return (
     <section className="cart">
-      <div className="container w-75 push-down">
+      <div className="container col-md-7 push-down">
         <h2 style={{ textAlign: "center", fontWeight: "bold" }}>
           Your shopping cart
         </h2>

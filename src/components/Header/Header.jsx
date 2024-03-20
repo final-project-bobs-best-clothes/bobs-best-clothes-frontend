@@ -12,7 +12,7 @@ function Header() {
     <nav className=" navbar fixed-top bg-white border-bottom">
       <div className="container">
         <Link to="/" className="navbar-brand" style={{ cursor: "pointer" }}>
-          Logo
+         <h3 style={{fontWeight:"bold"}}> Bob's Best Clothes</h3>
         </Link>
         <div className="d-flex">
           <Link to="/profile" style={{color:'inherit'}}>
