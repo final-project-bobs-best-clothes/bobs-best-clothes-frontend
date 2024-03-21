@@ -9,6 +9,8 @@ function ProductForm() {
     imageURL: "",
     category: "",
   });
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
   const {categories} = useContext(CategoryContext);
   console.log(categories);
 
@@ -25,11 +27,15 @@ function ProductForm() {
     event.preventDefault();
 
     console.log(productInput);
+    const token = localStorage.getItem('token')
+    console.log(token)
+    console.log(loggedInUser)
+
     try{
       const result = await fetch("http://localhost:4000/products",
       {
         method:"POST",
-        headers:{'Content-Type':'application/json'},
+        headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`},
         body:JSON.stringify(productInput)
       });
       if(!result.ok){
@@ -52,7 +58,7 @@ function ProductForm() {
           imageURL: "",
           category: "",
         });
-        window.location.reload();
+        //window.location.reload();
         
       }
     }catch(error){
@@ -121,7 +127,7 @@ function ProductForm() {
             {/* <option value=""> Categories</option> */}
             {categories.map((category, index) =>(
               <option key={index}
-              value={category.name} 
+              value={category.id} 
               >{category.name}
               </option>
             ))}
