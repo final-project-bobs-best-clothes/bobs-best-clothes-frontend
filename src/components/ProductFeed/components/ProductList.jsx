@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 function ProductList({ filterText, filterCategory }) {
   const { products } = useContext(ProductContext);
   
+  console.log(filterCategory, "filterCat")
+  console.log(products)
+
   // Filter products based on search text or category
   const filteredProducts = products.filter((item) => {
     const isMatchedTitle = item.title

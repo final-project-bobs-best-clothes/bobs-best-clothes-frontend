@@ -6,6 +6,7 @@ function CategoryForm() {
     name: "",
     description: "",
   });
+
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   
   const handleChange = (event) => {
@@ -42,8 +43,7 @@ function CategoryForm() {
           name:"",
           description:""
         });
-        //window.location.reload();
-        
+        window.location.reload();
       }
     }catch(error){
       console.log('Error', error)

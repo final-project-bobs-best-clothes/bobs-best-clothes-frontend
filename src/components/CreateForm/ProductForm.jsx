@@ -2,18 +2,23 @@ import React, { useContext, useState } from "react";
 import { CategoryContext } from "../../App";
 
 function ProductForm() {
+  const [category, setCategory] = useState({})
   const [productInput, setProductInput] = useState({
     title: "",
     description: "",
     price: "",
     imageURL: "",
-    category: "",
+    categoryId: 0
   });
   const {categories} = useContext(CategoryContext);
   console.log(categories);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
+    if(name === "category"){
+      setCategory(value)
+    }
 
     setProductInput((inputData) => ({
       ...inputData,
@@ -23,8 +28,12 @@ function ProductForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const token = localStorage.getItem('token')
+    console.log(token)
+
 
     console.log(productInput);
+    console.log(category)
     try{
       const result = await fetch("http://localhost:4000/products",
       {
@@ -41,7 +50,8 @@ function ProductForm() {
           imageURL: "",
           category: "",
         });
-      }else{
+      }
+      else{
         console.log("Product created")
         const data = await result.json();
         console.log(data);
@@ -117,11 +127,10 @@ function ProductForm() {
 
         <div className="mb-3">
           <label>Product categories</label>
-          <select className="form-select" name="category" onChange={handleChange}>
-            {/* <option value=""> Categories</option> */}
+          <select className="form-select" name="categoryId" onChange={handleChange}>
             {categories.map((category, index) =>(
               <option key={index}
-              value={category.name} 
+              value={category.id} 
               >{category.name}
               </option>
             ))}
