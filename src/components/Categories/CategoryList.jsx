@@ -4,6 +4,7 @@ import { CategoryContext } from "../../App";
 
 function CategoryList({ setFilterCategory }) {
  const {categories} = useContext(CategoryContext)
+ console.log(categories)
 /*   const [categories, setCategories] = useState([]); */
 
 /*   useEffect(() => {
