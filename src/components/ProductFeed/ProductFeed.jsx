@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import ProductList from "./components/ProductList";
 import SearchBar from "../SearchBar/SearchBar";
 import { CategoryContext } from "../../App";
-import SideBar from "../SideBar/SideBar";
 import "./../../App.css";
 import CategoryList from "../Categories/CategoryList";
 
@@ -18,12 +17,8 @@ function ProductFeed() {
         </div>
         <div className="col-md-2 col-12">
           <CategoryList setFilterCategory={setFilterCategory}> </CategoryList>
-
-          {/* <SideBar setFilterCategory={setFilterCategory}></SideBar> */}
         </div>
-
       </div>
-      {/* Product List */}
       <div className="col-md-12 p-4">
         <ProductList filterText={filterText} filterCategory={filterCategory} />
       </div>

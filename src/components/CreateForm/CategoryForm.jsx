@@ -7,7 +7,7 @@ function CategoryForm() {
     description: "",
   });
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setCategoryInput((inputData) => ({
@@ -17,40 +17,34 @@ function CategoryForm() {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(categoryInput);
-    const token = localStorage.getItem('token')
-    console.log(token)
-    console.log(loggedInUser)
-    try{
-      const result = await fetch("http://localhost:4000/categories",
-      {
-        method:"POST",
-        headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`},
-        body:JSON.stringify(categoryInput)
+    const token = localStorage.getItem("token");
+    try {
+      const result = await fetch("http://localhost:4000/categories", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(categoryInput),
       });
-      if(!result.ok){
-        console.log("Failed to create category")
+      if (!result.ok) {
+        console.log("Failed to create category");
         setCategoryInput({
           name: "",
-          description: ""
-        })
-      }else{
-        console.log("Category created")
-        const data = await result.json();
-        console.log(data);
-        setCategoryInput({
-          name:"",
-          description:""
+          description: "",
         });
-        //window.location.reload();
-        
+      } else {
+        console.log("Category created");
+        const data = await result.json();
+        setCategoryInput({
+          name: "",
+          description: "",
+        });
       }
-    }catch(error){
-      console.log('Error', error)
+    } catch (error) {
+      console.log("Error", error);
     }
   };
-
-
 
   return (
     <div className="container push-down">

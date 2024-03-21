@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import DetailedProduct from "./components/ProductFeed/components/DetailedProduct";
@@ -30,7 +29,6 @@ function App() {
     fetch("http://localhost:4000/products")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data);
         setProducts(data.data);
       });
   };
@@ -39,29 +37,16 @@ function App() {
     fetch("http://localhost:4000/categories")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data);
         setCategories(data.data);
       });
   };
 
-/*   //Temporary set logged in user to first in list
-  const fetchUser = () => {
-    fetch("http://localhost:4000/users")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.data);
-        const tempUser = data.data[0]
-        localStorage.setItem("loggedInUser", JSON.stringify(tempUser));
-      });
-  }; */
 
   useEffect(() => {
     fetchProducts();
     fetchCategories();
- /*    fetchUser(); */
   }, []);
 
-  //console.log(cart);
   return (
     <>
       <OrderContext.Provider value={{orders: orders, setOrders: setOrders}}>
