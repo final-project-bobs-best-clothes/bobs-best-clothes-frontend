@@ -1,24 +1,56 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { CategoryContext } from "../../App";
 
 function CategoryForm() {
   const [categoryInput, setCategoryInput] = useState({
     name: "",
     description: "",
   });
-
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setCategoryInput((inputData) => ({
       ...inputData,
       [name]: value,
     }));
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(categoryInput);
-    setCategoryInput({ name: " ", description: "" });
+    const token = localStorage.getItem('token')
+    console.log(token)
+    console.log(loggedInUser)
+    try{
+      const result = await fetch("http://localhost:4000/categories",
+      {
+        method:"POST",
+        headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`},
+        body:JSON.stringify(categoryInput)
+      });
+      if(!result.ok){
+        console.log("Failed to create category")
+        setCategoryInput({
+          name: "",
+          description: ""
+        })
+      }else{
+        console.log("Category created")
+        const data = await result.json();
+        console.log(data);
+        setCategoryInput({
+          name:"",
+          description:""
+        });
+        //window.location.reload();
+        
+      }
+    }catch(error){
+      console.log('Error', error)
+    }
   };
+
+
 
   return (
     <div className="container push-down">
