@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext, OrderContext } from "../../App";
 import { Link } from "react-router-dom";
 import "./../../App.css"
 import CartItem from "./CartItem";
+import PopUp from "../Pop-up-order/PopUp";
 
 function CartItems() {
   const { cart, setCart, setTotalPrice, totalPrice } = useContext(CartContext);
   const { setOrders, orders } = useContext(OrderContext);
-  const localUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  const [showPopUp, setShowPopUp] = useState(false);
 
   console.log(cart)
   //Update total every time the cart changes
@@ -45,44 +47,54 @@ function CartItems() {
     return item.product.price * item.quantity;
   };
 
-  const handleCheckOut = async () => {
+  const handleCheckOut =  () => {
 
-
-    console.log(cart);
-
-    // Create a new order object
-    const newOrder = {
-      cartItems: cart,
-      user: localUser,
-      total: totalPrice
-    };
-    const token = localStorage.getItem('token')
-    console.log(token)
-
-    try {
-      const res = await fetch("http://localhost:4000/orders", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
-        body: JSON.stringify(newOrder)
-      })
-      if(!res.ok){
-        console.error("Failed to add post")
-      }
-      else{
-        console.log("order succesfully added")
-        setOrders([...orders, 
-          {
-            cartItems: cart,
-            user: localUser,
-            id: orders.length + 1,
-            total: totalPrice
-          }])
-        setCart([])  
-      }
+    if(!loggedInUser){
+      setShowPopUp(true)
+      
     }
-    catch (error){
-      console.error('Error:', error)
+    else {
+      placeOrder()
     }
+  }
+
+  const placeOrder = async () => {
+       // Create a new order object
+       const newOrder = {
+        cartItems: cart,
+        user: loggedInUser,
+        total: totalPrice
+      };
+      const token = localStorage.getItem('token')
+      console.log(token)
+  
+      //Post to database if the user is authenticated
+      try {
+        const res = await fetch("http://localhost:4000/orders", {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
+          body: JSON.stringify(newOrder)
+        })
+        if(!res.ok){
+          console.error("Failed to add post")
+        }
+        else{
+          console.log("order succesfully added")
+        }
+      }
+      catch (error){
+        console.error('Error:', error)
+      }
+  
+      setOrders([...orders, 
+        {
+          cartItems: cart,
+          user: loggedInUser,
+          id: orders.length + 1,
+          total: totalPrice
+        }])
+      setCart([])
+      alert("Order complete")   
   }
 
   return (
@@ -124,6 +136,7 @@ function CartItems() {
           </ul>
         )}
       </div>
+      <PopUp show={showPopUp} setShow={setShowPopUp} placeOrder={() => placeOrder()}></PopUp>
     </section>
   );
 }

@@ -22,12 +22,12 @@ function OrderList() {
     const token = localStorage.getItem('token')
     console.log(token)
     console.log(loggedInUser.id)
-    fetch(`http://localhost:4000/orders`, {
+    fetch(`http://localhost:4000/orders/${loggedInUser.id}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data, "fetch");
+        console.log(data.data);
         setOrders(data.data);
       });
   };
