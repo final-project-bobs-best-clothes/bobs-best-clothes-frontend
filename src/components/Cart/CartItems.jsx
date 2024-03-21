@@ -12,7 +12,6 @@ function CartItems() {
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   const [showPopUp, setShowPopUp] = useState(false);
 
-  console.log(cart)
   //Update total every time the cart changes
   useEffect(() => {
     calculateTotal();
@@ -66,7 +65,6 @@ function CartItems() {
         total: totalPrice
       };
       const token = localStorage.getItem('token')
-      console.log(token)
   
       //Post to database if the user is authenticated
       try {
