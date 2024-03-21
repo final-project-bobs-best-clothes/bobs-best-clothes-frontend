@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-
 function SearchBar({ filterText, setFilterText }) {
   const handleChange = (e) => {
     setFilterText(e.target.value);

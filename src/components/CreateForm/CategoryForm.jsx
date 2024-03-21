@@ -17,10 +17,7 @@ function CategoryForm() {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(categoryInput);
     const token = localStorage.getItem('token')
-    console.log(token)
-    console.log(loggedInUser)
     try{
       const result = await fetch("http://localhost:4000/categories",
       {
@@ -29,7 +26,6 @@ function CategoryForm() {
         body:JSON.stringify(categoryInput)
       });
       if(!result.ok){
-        console.log("Failed to create category")
         setCategoryInput({
           name: "",
           description: ""
@@ -37,7 +33,6 @@ function CategoryForm() {
       }else{
         console.log("Category created")
         const data = await result.json();
-        console.log(data);
         setCategoryInput({
           name:"",
           description:""

@@ -35,7 +35,6 @@ function SignUpForm() {
       if(role === "admin"){
         signUpCredentials.role.push('admin')
       }
-      console.log(signUpCredentials)
 
       //PostReq
       try {

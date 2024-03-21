@@ -48,16 +48,12 @@ function CartItems() {
   const handleCheckOut = async () => {
 
 
-    console.log(cart);
-
-    // Create a new order object
     const newOrder = {
       cartItems: cart,
       user: localUser,
       total: totalPrice
     };
     const token = localStorage.getItem('token')
-    console.log(token)
 
     try {
       const res = await fetch("http://localhost:4000/orders", {

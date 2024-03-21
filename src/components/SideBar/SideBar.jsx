@@ -1,14 +1,10 @@
-/* eslint-disable react/prop-types */
 import CategoryList from "../Categories/CategoryList";
 
-
-
-function SideBar({setFilterCategory}) {
-
+function SideBar({ setFilterCategory }) {
   return (
-      <div className="mt-3">
-        <CategoryList setFilterCategory={setFilterCategory}></CategoryList>
-      </div>
+    <div className="mt-3">
+      <CategoryList setFilterCategory={setFilterCategory}></CategoryList>
+    </div>
   );
 }
 

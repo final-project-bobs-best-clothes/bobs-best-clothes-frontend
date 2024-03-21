@@ -18,10 +18,7 @@ function ProductFeed() {
         </div>
         <div className="col-md-2 col-12">
           <CategoryList setFilterCategory={setFilterCategory}> </CategoryList>
-
-          {/* <SideBar setFilterCategory={setFilterCategory}></SideBar> */}
         </div>
-
       </div>
       {/* Product List */}
       <div className="col-md-12 p-4">

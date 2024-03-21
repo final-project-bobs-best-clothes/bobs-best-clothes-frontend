@@ -20,14 +20,11 @@ function OrderList() {
 
   const fetchOrders = () => {
     const token = localStorage.getItem('token')
-    console.log(token)
-    console.log(loggedInUser.id)
     fetch(`http://localhost:4000/orders`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data, "fetch");
         setOrders(data.data);
       });
   };

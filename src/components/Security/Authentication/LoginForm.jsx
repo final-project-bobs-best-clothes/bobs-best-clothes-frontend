@@ -30,7 +30,6 @@ function LoginForm() {
           body: JSON.stringify(loginCredentials)
         });
         if (!res.ok) {
-          console.error("Failed to login");
           setFailedLogin(true)
           setLoginCredentials({
             username: "",
@@ -38,11 +37,9 @@ function LoginForm() {
           })
         } else {
 
-          console.log("Login successful");
           setFailedLogin(false)
           
           const data = await res.json();
-          console.log(data);
 
           const jwtToken = data.token
           localStorage.setItem('token', jwtToken);
@@ -61,14 +58,12 @@ function LoginForm() {
     const fetchUser = (id) => {
       fetch(`http://localhost:4000/users/${id}`)
         .then((res) => {
-          console.log(res)
           if (!res.ok) {
             throw new Error('Failed to fetch user data');
           }
           return res.json();
         })
         .then((data) => {
-          console.log(data.data);
           localStorage.setItem("loggedInUser", JSON.stringify(data.data));
           window.location.reload();
         })

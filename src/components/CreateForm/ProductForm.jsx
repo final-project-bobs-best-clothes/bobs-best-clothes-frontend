@@ -11,8 +11,7 @@ function ProductForm() {
   });
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  const {categories} = useContext(CategoryContext);
-  console.log(categories);
+  const { categories } = useContext(CategoryContext);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,20 +25,19 @@ function ProductForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(productInput);
-    const token = localStorage.getItem('token')
-    console.log(token)
-    console.log(loggedInUser)
+    const token = localStorage.getItem("token");
 
-    try{
-      const result = await fetch("http://localhost:4000/products",
-      {
-        method:"POST",
-        headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`},
-        body:JSON.stringify(productInput)
+    try {
+      const result = await fetch("http://localhost:4000/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(productInput),
       });
-      if(!result.ok){
-        console.log("Failed to create product")
+      if (!result.ok) {
+        console.log("Failed to create product");
         setProductInput({
           title: "",
           description: "",
@@ -47,10 +45,8 @@ function ProductForm() {
           imageURL: "",
           category: "",
         });
-      }else{
-        console.log("Product created")
+      } else {
         const data = await result.json();
-        console.log(data);
         setProductInput({
           title: "",
           description: "",
@@ -58,14 +54,10 @@ function ProductForm() {
           imageURL: "",
           category: "",
         });
-        //window.location.reload();
-        
       }
-    }catch(error){
-      console.log('Error', error)
+    } catch (error) {
+      console.log("Error", error);
     }
-
-
   };
 
   return (
@@ -123,18 +115,17 @@ function ProductForm() {
 
         <div className="mb-3">
           <label>Product categories</label>
-          <select className="form-select" name="category" onChange={handleChange}>
-            {/* <option value=""> Categories</option> */}
-            {categories.map((category, index) =>(
-              <option key={index}
-              value={category.id} 
-              >{category.name}
+          <select
+            className="form-select"
+            name="category"
+            onChange={handleChange}
+          >
+            {categories.map((category, index) => (
+              <option key={index} value={category.id}>
+                {category.name}
               </option>
             ))}
-            
-
           </select>
-
         </div>
 
         <button className="btn btn-dark">Submit</button>

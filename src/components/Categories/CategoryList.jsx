@@ -4,20 +4,6 @@ import { CategoryContext } from "../../App";
 
 function CategoryList({ setFilterCategory }) {
  const {categories} = useContext(CategoryContext)
-/*   const [categories, setCategories] = useState([]); */
-
-/*   useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const fetchCategories = () => {
-    fetch("http://localhost:4000/categories")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.data, "categories");
-        setCategories(data.data);
-      });
-  }; */
 
   return (
     <div>
@@ -47,21 +33,3 @@ function CategoryList({ setFilterCategory }) {
 }
 
 export default CategoryList;
-{
-  /**      <Dropdown  onSelect={(e) => setFilterCategory(e.target.value)} >
-        <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-          Filter Categories
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item key={0} onSelect={() => setFilterCategory('')}>
-            All products
-          </Dropdown.Item>
-          {categories.map((category) => (
-            <Dropdown.Item key={category.id} onSelect={() => {
-               setFilterCategory(category.name) }}>
-              {category.name}
-            </Dropdown.Item>
-          ))}
-        </Dropdown.Menu>
-      </Dropdown> */
-}
