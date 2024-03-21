@@ -15,7 +15,7 @@ function Authentication() {
       </div>
       : 
       <div>
-      <SignUpForm></SignUpForm>
+      <SignUpForm setDisplayState={setDisplayState}></SignUpForm>
       <p className="mt-4">Alredy have an account?</p>
       <p>Press here to <strong onClick={() => setDisplayState("login")} style={{cursor: 'pointer'}}>Log in</strong></p> 
       </div>

@@ -24,6 +24,7 @@ function OrderList() {
     console.log(loggedInUser.id)
     fetch(`http://localhost:4000/orders/${loggedInUser.id}`, {
       method: "GET",
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
     })
       .then((res) => res.json())
       .then((data) => {

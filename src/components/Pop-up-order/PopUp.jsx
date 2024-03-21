@@ -1,6 +1,5 @@
 
 import { Button, Modal } from 'react-bootstrap';
-import { useState } from 'react';
 
 
 function PopUp({show, setShow, placeOrder}) {
