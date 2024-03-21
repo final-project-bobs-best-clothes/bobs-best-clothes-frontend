@@ -15,24 +15,51 @@ function ProductForm() {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    console.log(name, value);
     setProductInput((inputData) => ({
       ...inputData,
       [name]: value,
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     console.log(productInput);
+    try{
+      const result = await fetch("http://localhost:4000/products",
+      {
+        method:"POST",
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(productInput)
+      });
+      if(!result.ok){
+        console.log("Failed to create product")
+        setProductInput({
+          title: "",
+          description: "",
+          price: "",
+          imageURL: "",
+          category: "",
+        });
+      }else{
+        console.log("Product created")
+        const data = await result.json();
+        console.log(data);
+        setProductInput({
+          title: "",
+          description: "",
+          price: "",
+          imageURL: "",
+          category: "",
+        });
+        window.location.reload();
+        
+      }
+    }catch(error){
+      console.log('Error', error)
+    }
 
-    setProductInput({
-      title: "",
-      description: "",
-      price: "",
-      imageURL: "",
-      category: "",
-    });
+
   };
 
   return (
