@@ -8,7 +8,8 @@ function DetailedProduct() {
   const { cart, setCart } = useContext(CartContext);
   const [product, setProduct] = useState(null);
   const { id } = useParams();
-  
+  console.log(product)
+
   useEffect(() => {
     const selectedProduct = products.find(
       (product) => Number(product.id) === Number(id)
@@ -17,7 +18,7 @@ function DetailedProduct() {
   }, [id, products]);
 
   if (!product) {
-    return <div>Loading...</div>;
+    return <div className="text-center push-down">Loading...</div>;
   }
 
 
@@ -41,9 +42,9 @@ function DetailedProduct() {
         <div className="col-12 col-md-4 d-flex justify-content-center ">
         <img
           src={product.imageURL}
-          className="img-fluid mb-3" // Use Bootstrap's img-fluid class for responsive images
+          className="img-fluid mb-3" 
           alt={product.title}
-          style={{maxWidth:'300px', maxHeight:'300px'}} // Set max width and height for the image
+          style={{maxWidth:'300px', maxHeight:'300px'}} 
         />
         </div>
         <div className="col-12 col-md-8">
