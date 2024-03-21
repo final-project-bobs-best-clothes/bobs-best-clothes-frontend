@@ -37,6 +37,12 @@ function OrderList() {
     fetchOrders();
   }, []);
 
+  if(orders.length === 0){
+    return (
+      <h5 className="text-center">You have no orders yet</h5>
+    )
+  }
+
   return (
     <div className="container">
       {currentOrders.map((order, index) => (
