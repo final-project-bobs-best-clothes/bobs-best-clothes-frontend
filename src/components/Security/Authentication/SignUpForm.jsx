@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./../../../App.css"
 
-function SignUpForm() {
+function SignUpForm({setDisplayState}) {
+  
     const [role, setRole] = useState("")
     const [signUpCredentials, setSignUpCredentials] = useState(
       {
@@ -46,9 +47,11 @@ function SignUpForm() {
         })
         if(!res.ok){
           console.error("Failed to create account")
+          alert("failed to create account")
         }
         else{
           console.log("Account created") 
+          setDisplayState("login")
         }
       }
       catch (error){

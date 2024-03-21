@@ -9,7 +9,6 @@ import Profile from "./components/Profile/Profile";
 
 import ProductForm from "./components/CreateForm/ProductForm";
 import CategoryForm from "./components/CreateForm/CategoryForm";
-import AdminPanel from "./components/Admin/AdminPanel";
 import Authentication from "./components/Security/Authentication";
 
 
@@ -67,9 +66,7 @@ function App() {
     <>
       <OrderContext.Provider value={{orders: orders, setOrders: setOrders}}>
       <CartContext.Provider value={{cart: cart, setCart:setCart, totalPrice: totalPrice, setTotalPrice: setTotalPrice}}>
-        <Header></Header>
-        <AdminPanel></AdminPanel>
-       
+        <Header></Header>       
       <CategoryContext.Provider value={{ categories: categories ,filterCategory: filterCategory, setFilterCategory: setFilterCategory}}>
       <ProductContext.Provider value={{ products: products, setProducts: setProducts }} >
         <Routes>
